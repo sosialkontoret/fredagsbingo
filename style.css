@@ -1,0 +1,81 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: calc(14px + 1.5vw);
+  font-size: clamp(16px, calc(14px + 1.5vw), 32px);
+}
+
+body {
+  font-family: monospace;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+  text-align: center;
+}
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 0.75rem;
+  margin: 0 auto;
+  max-height: 90vh;
+  max-width: 50rem;
+  max-width: max(50rem, 90vw);
+}
+
+.bingo-tile {
+  background-color: transparent;
+  border: 0.15rem solid #373fff;
+  padding: 0;
+  position: relative;
+}
+
+.bingo-tile:not([data-option=""]) {
+  background-color: rgba(126, 35, 157, 0.1);
+}
+
+.bingo-tile[data-free-tile="true"]::before {
+  content: "☀️";
+  font-size: 1.5rem;
+  left: 50%;
+  padding-bottom: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bingo-tile::before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.bingo-options {
+  display: none;
+  position: absolute;
+}
+
+.bingo-grid .bingo-options {
+  display: block;
+}
+
+.bingo-tile-text {
+  color: #7460e1;
+  font-family: monospace;
+  font-size: 0.5rem;
+  font-weight: 600;
+  left: 50%;
+  max-width: 90%;
+  overflow-wrap: break-word;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
