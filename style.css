@@ -15,7 +15,14 @@ body {
   padding: 2rem;
 }
 
+.line {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 h1 {
+  flex-grow: 10000;
   font-style: italic;
   color: #373fff;
   text-align: center;
@@ -38,6 +45,12 @@ h1 {
   position: relative;
 }
 
+.bingo-tile::before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
 .bingo-tile:not([data-option=""]) {
   background-color: rgba(126, 35, 157, 0.1);
 }
@@ -52,10 +65,12 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-.bingo-tile::before {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
+.bingo-tile[data-crossed-off="true"] {
+  background-color: #373fff;
+}
+
+.bingo-tile[data-crossed-off="true"] .bingo-tile-text {
+  color: white;
 }
 
 .bingo-options {
@@ -84,4 +99,75 @@ h1 {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.toggle, .toggle::after, .toggle *, .toggle *::after {
+  transition: 0.25s ease transform;
+}
+
+.control {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  font-size: 0.5rem;
+}
+
+.toggle {
+  display: inline-block;
+  height: 2.125em;
+  margin: 0.5em;
+  position: relative;
+  width: 3.75em;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle .trigger {
+  background: #666;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.toggle .trigger, .toggle .trigger::after {
+  border-radius: 1rem;
+}
+
+.toggle .trigger::after {
+  background-color: white;
+  bottom: 0.25em;
+  content: "";
+  height: 1.625em;
+  left: 0.25em;
+  position: absolute;
+  width: 1.625em;
+}
+
+.toggle .trigger:hover {
+  cursor: pointer;
+}
+
+.toggle input:checked ~ .trigger {
+  background: #373fff;
+}
+
+.toggle input:checked ~ .trigger::after {
+  transform: translateX(100%);
+}
+
+.toggle.x2 {
+  transform: scale(2);
+}
+
+.reset-button {
+  background-color: white;
+  border: 2px solid #373fff;
+  font-family: inherit;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.25em 0.5em;
 }

@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Fredagsbingo!</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="/script.js" defer></script>
-  </head>  
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Fredagsbingo!</title>
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
+  <script
+    src="/script.js"
+    defer
+  ></script>
+</head>
+
+<body>
+  <div class="line">
     <h1>🌸Fredagsbingo🌸</h1>
-    
-    <div class="bingo-grid">
-      
+    <div class="control">
+      <span>Velg ord / Spill</span>
+      <label class="toggle">
+        <input type="checkbox" class="toggle-switch" /><span class="trigger"></span>
+      </label>
     </div>
-    
-    <select class="bingo-options" aria-label="Velg tekst">
-      
-    </select>
-  </body>
+  </div>
+
+  <div class="bingo-grid">
+
+  </div>
+
+  <button class="reset-button" type="button">Nullstill brett</button>
+  <select
+    class="bingo-options"
+    aria-label="Velg tekst"
+  >
+
+  </select>
+</body>
+
 </html>

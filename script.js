@@ -6,18 +6,18 @@ const LOSS = Symbol();
 const states = {
   [PICK_AND_CHOOSE]: 0,
   [PLAYING]: 1,
-  [WIN]: 2,
-  [LOSS]: 3
 };
 
-const currentState = states[PICK_AND_CHOOSE];
+let currentState = states[PICK_AND_CHOOSE];
 
 const numberOfTiles = 25;
 
 const $bingoGrid = document.querySelector(".bingo-grid");
 const $bingoOptions = document.querySelector(".bingo-options");
+const $switch = document.querySelector(".toggle-switch");
+const $resetButton = document.querySelector(".reset-button");
 
-const bingoTiles = [];
+let bingoTiles = [];
 
 const optionGroups = [
   {
@@ -107,17 +107,17 @@ function createBingoTiles() {
 
 function createBingoTile(index) {
   const isMiddleTile = index === 12;
-  
+
   const $bingoTile = document.createElement("button");
   $bingoTile.classList.add("bingo-tile");
   $bingoTile.addEventListener("click", clickBingoTile);
   $bingoTile.type = "button";
   $bingoTile.dataset.option = "";
   $bingoTile.dataset.freeTile = isMiddleTile;
-  
+
   const $tileText = document.createElement("span");
   $tileText.classList.add("bingo-tile-text");
-  
+
   $bingoTile.appendChild($tileText);
 
   return $bingoTile;
@@ -128,18 +128,26 @@ function clickBingoTile(event) {
   if (!$bingoTile || $bingoTile === $activeTile) {
     return;
   }
-  
+
   const isFreeTile = $bingoTile.dataset.freeTile === "true";
   if (isFreeTile) {
     return;
   }
-  
-  emptyBingoOptions();
-  addBingoOptions();
-  
-  $bingoTile.appendChild($bingoOptions);
-  
-  $activeTile = $bingoTile;  
+
+  const isPickingAndChoosing = currentState === states[PICK_AND_CHOOSE];
+  const isPlaying = currentState === states[PLAYING];
+
+  if (isPickingAndChoosing) {
+    emptyBingoOptions();
+    addBingoOptions();
+
+    $bingoTile.appendChild($bingoOptions);
+
+    $activeTile = $bingoTile;
+  } else if (isPlaying) {
+    console.log($bingoTile.dataset.crossedOff);
+    $bingoTile.dataset.crossedOff = !$bingoTile.dataset.crossedOff || $bingoTile.dataset.crossedOff === "false";
+  }
 }
 
 function getAvailableOptions() {
@@ -157,9 +165,9 @@ function addBingoOptions() {
   defaultOption.textContent = "––– Velg alternativ ✨"
   defaultOption.value = "default";
   defaultOption.selected = true;
-  
+
   $bingoOptions.appendChild(defaultOption);
-  
+
   for (const $bingoOptionGroup of createBingoOptionGroups()) {
     $bingoOptions.appendChild($bingoOptionGroup);
   }
@@ -168,19 +176,19 @@ function addBingoOptions() {
 function createBingoOptionGroups() {
   const options = getAvailableOptions();
   const optGroups = [];
-  
+
   for (const optionGroup of options) {
     const $optGroup = createBingoOptionGroup(optionGroup.categoryName);
-    
+
     for (const option of optionGroup.options) {
       const $option = createBingoOption(option);
-      
+
       $optGroup.appendChild($option);
     }
-    
+
     optGroups.push($optGroup);
   }
-  
+
   return optGroups;
 }
 
@@ -195,20 +203,41 @@ function createBingoOption(option) {
   const $option = document.createElement('option');
   $option.textContent = option;
   $option.value = option;
-  
+
   return $option;
+}
+
+function onToggleGameMode(event) {
+  const isChecked = event.target.checked;
+
+  if (isChecked) {
+    currentState = states[PLAYING];
+
+    const bingoOptionsIsInDom = Boolean($bingoOptions.parentElement);
+    if (bingoOptionsIsInDom) {
+      $bingoOptions.parentElement.removeChild($bingoOptions);
+    }
+  } else {
+    currentState = states[PICK_AND_CHOOSE];
+  }
 }
 
 function init() {
   reset();
-  $bingoOptions.addEventListener('change', onSelectOption); 
+  $bingoOptions.addEventListener('change', onSelectOption);
+  $switch.addEventListener('change', onToggleGameMode);
+  $resetButton.addEventListener('click', reset);
 }
 
 function reset() {
   document.body.appendChild($bingoOptions);
-  $bingoGrid.innerHtml = '';
-  
-  
+
+  currentState = states[PICK_AND_CHOOSE];
+  $switch.checked = false;
+
+  $bingoGrid.innerHTML = '';
+  bingoTiles = [];
+
   for (const tile of createBingoTiles()) {
     bingoTiles.push(tile);
     $bingoGrid.appendChild(tile);
@@ -219,12 +248,12 @@ function emptyBingoOptions() {
   $bingoOptions.innerHTML = '';
 }
 
-function onSelectOption(event) {  
+function onSelectOption(event) {
   event.stopPropagation();
   const option = event.target.value;
   const $button = event.target.parentNode;
 
-  
+
   setBingoOption(option, $button);
   emptyBingoOptions();
   addBingoOptions();
@@ -232,16 +261,16 @@ function onSelectOption(event) {
 
 function setBingoOption(option, $button) {
   const $tileText = $button.querySelector(".bingo-tile-text");
-  
+
   const isDefaultOption = option === 'default';
   if (isDefaultOption) {
     $button.dataset.option = null;
     $tileText.textContent = '';
   }
-  
+
   $button.dataset.option = option;
   $tileText.textContent = option;
-  
+
   $activeTile = null;
 }
 
