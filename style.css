@@ -60,7 +60,13 @@ h1 {
 
 .bingo-options {
   display: none;
+  font-family: inherit;
+  font-size: 1.25em;
+  left: 50%;
+  padding: 0.25em 0.5em; 
   position: absolute;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .bingo-grid .bingo-options {
