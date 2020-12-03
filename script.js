@@ -74,7 +74,7 @@ const optionGroups = [{
     "Team Hamar Julebrus",
     "Team Aass Julebrus",
     "Juleøl",
-    "Marispangris",
+    "Marsipangris",
     "Mandel",
     "Boxing-day",
     "Northugs julelåt",
