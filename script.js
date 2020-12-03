@@ -139,7 +139,6 @@ function clickBingoTile(event) {
 
     $activeTile = $bingoTile;
   } else if (isPlaying) {
-    console.log($bingoTile.dataset.crossedOff);
     $bingoTile.dataset.crossedOff = !$bingoTile.dataset.crossedOff || $bingoTile.dataset.crossedOff === "false";
   }
 }
