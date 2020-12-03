@@ -19,8 +19,7 @@ const $resetButton = document.querySelector(".reset-button");
 
 let bingoTiles = [];
 
-const optionGroups = [
-  {
+const optionGroups = [{
     categoryName: "Korona",
     options: [
       "Hjemmekontor",
@@ -155,7 +154,7 @@ function getAvailableOptions() {
     ...optionGroup,
     options: optionGroup.options.filter(
       option =>
-        !bingoTiles.some($bingoTile => $bingoTile.dataset.option === option)
+      !bingoTiles.some($bingoTile => $bingoTile.dataset.option === option)
     ),
   }));
 }
@@ -212,6 +211,7 @@ function onToggleGameMode(event) {
 
   if (isChecked) {
     currentState = states[PLAYING];
+    $activeTile = null;
 
     const bingoOptionsIsInDom = Boolean($bingoOptions.parentElement);
     if (bingoOptionsIsInDom) {
@@ -237,6 +237,8 @@ function reset() {
 
   $bingoGrid.innerHTML = '';
   bingoTiles = [];
+
+  $activeTile = null;
 
   for (const tile of createBingoTiles()) {
     bingoTiles.push(tile);
