@@ -220,7 +220,21 @@ function init() {
   reset();
   $bingoOptions.addEventListener('change', onSelectOption);
   $switch.addEventListener('change', onToggleGameMode);
-  $resetButton.addEventListener('click', reset);
+
+  $resetButton.addEventListener('click', () => {
+    const dialog = new ConfirmDialog({
+      trueButtonText: "Ja!",
+      falseButtonText: "Nei",
+      questionText: "Er du sikker på at du vil nullstille brettet?"
+    });
+
+    dialog.confirm().then(shouldReset => {
+      if (shouldReset) {
+        reset();
+      }
+    });
+  });
+
 }
 
 function reset() {
