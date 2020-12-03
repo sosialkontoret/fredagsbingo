@@ -285,3 +285,8 @@ function setBingoOption(option, $button) {
 }
 
 init();
+
+// Enable navigation prompt
+window.onbeforeunload = function () {
+  return true;
+};
