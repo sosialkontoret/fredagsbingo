@@ -211,6 +211,7 @@ function onToggleGameMode(event) {
 
   if (isChecked) {
     currentState = states[PLAYING];
+    $activeTile = null;
 
     const bingoOptionsIsInDom = Boolean($bingoOptions.parentElement);
     if (bingoOptionsIsInDom) {
@@ -236,6 +237,8 @@ function reset() {
 
   $bingoGrid.innerHTML = '';
   bingoTiles = [];
+
+  $activeTile = null;
 
   for (const tile of createBingoTiles()) {
     bingoTiles.push(tile);
