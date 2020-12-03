@@ -7,9 +7,17 @@
 :root {
   font-size: calc(14px + 1.5vw);
   font-size: clamp(16px, calc(14px + 1.5vw), 32px);
+
+  --color-1: hsl(0, 70%, 50%);
+  --color-2:  hsl(141, 82%, 20%);
+  --color-2--light: #cec;
+  --color-3:  hsl(0, 0%, 90%);
+
+  --snow-z-index: 1;
 }
 
 body {
+  background-color: var(--color-1);
   font-family: monospace;
   margin: 0;
   padding: 2rem;
@@ -18,7 +26,7 @@ body {
 h1 {
   flex-grow: 10000;
   font-style: italic;
-  color: #373fff;
+  color: var(--color-2);
   text-align: center;
 }
 
@@ -36,8 +44,8 @@ main {
 }
 
 .bingo-tile {
-  background-color: transparent;
-  border: 0.15rem solid #373fff;
+  border: 2px solid;
+  color: var(--color-2);
   padding: 0;
   position: relative;
 }
@@ -49,11 +57,11 @@ main {
 }
 
 .bingo-tile:not([data-option=""]) {
-  background-color: rgba(126, 35, 157, 0.1);
+  background-color: var(--color-2--light);
 }
 
 .bingo-tile[data-free-tile="true"]::before {
-  content: "☀️";
+  content: "🎄";
   font-size: 1.5rem;
   left: 50%;
   padding-bottom: 0;
@@ -62,11 +70,9 @@ main {
   transform: translate(-50%, -50%);
 }
 
+.bingo-tile[data-free-tile="true"],
 .bingo-tile[data-crossed-off="true"] {
-  background-color: #373fff;
-}
-
-.bingo-tile[data-crossed-off="true"] .bingo-tile-text {
+  background-color: var(--color-2);
   color: white;
 }
 
@@ -86,7 +92,6 @@ main {
 }
 
 .bingo-tile-text {
-  color: #7460e1;
   font-family: monospace;
   font-size: 0.5rem;
   font-weight: 600;
@@ -96,6 +101,21 @@ main {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+canvas {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@supports (pointer-events: none) {
+  canvas {
+    pointer-events: none;
+    z-index: var(--snow-z-index);
+  }
 }
 
 .toggle, .toggle::after, .toggle *, .toggle *::after {
@@ -122,7 +142,7 @@ main {
 }
 
 .toggle .trigger {
-  background: #666;
+  background: rgba(0, 0, 0, 0.3);
   bottom: 0;
   left: 0;
   position: absolute;
@@ -149,7 +169,7 @@ main {
 }
 
 .toggle input:checked ~ .trigger {
-  background: #373fff;
+  background: var(--color-2);
 }
 
 .toggle input:checked ~ .trigger::after {
@@ -162,7 +182,7 @@ main {
 
 .reset-button {
   background-color: white;
-  border: 2px solid #373fff;
+  border: 2px solid var(--color-2);
   font-family: inherit;
   font-size: 0.75rem;
   margin-top: 1rem;
