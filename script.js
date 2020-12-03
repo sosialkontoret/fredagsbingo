@@ -19,8 +19,7 @@ const $resetButton = document.querySelector(".reset-button");
 
 let bingoTiles = [];
 
-const optionGroups = [
-  {
+const optionGroups = [{
     categoryName: "Korona",
     options: [
       "Hjemmekontor",
@@ -155,7 +154,7 @@ function getAvailableOptions() {
     ...optionGroup,
     options: optionGroup.options.filter(
       option =>
-        !bingoTiles.some($bingoTile => $bingoTile.dataset.option === option)
+      !bingoTiles.some($bingoTile => $bingoTile.dataset.option === option)
     ),
   }));
 }
