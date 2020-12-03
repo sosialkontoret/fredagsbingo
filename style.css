@@ -23,12 +23,6 @@ body {
   padding: 2rem;
 }
 
-.line {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 h1 {
   flex-grow: 10000;
   font-style: italic;
