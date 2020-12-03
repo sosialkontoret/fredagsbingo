@@ -28,14 +28,17 @@ h1 {
   text-align: center;
 }
 
+main {
+  margin: 0 auto;
+  max-height: 90vh;
+  max-width: 20rem;
+  max-width: min(20rem, 90vw);
+}
+
 .bingo-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 0.75rem;
-  margin: 0 auto;
-  max-height: 90vh;
-  max-width: 50rem;
-  max-width: max(50rem, 90vw);
 }
 
 .bingo-tile {
