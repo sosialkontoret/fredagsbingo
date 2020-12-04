@@ -69,7 +69,6 @@
     rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>"
   >
-
 </head>
 
 <body>
@@ -84,27 +83,27 @@
   <h1>🎄 Julefredagsbingo 🎄</h1>
 
   <main>
-    <div class="control">
-      <span>Velg ord / Spill</span>
-      <label class="toggle">
-        <input
-          type="checkbox"
-          class="toggle-switch"
-        /><span class="trigger"></span>
-      </label>
+    <div class="controls">
+      <div class="control">
+        <span>Velg ord / Spill</span>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            class="toggle-switch"
+          /><span class="trigger"></span>
+        </label>
+      </div>
+      <button
+        class="reset-button"
+        type="button"
+      >Nullstill brett</button>
     </div>
     <div class="bingo-grid"></div>
-    <button
-      class="reset-button"
-      type="button"
-    >Nullstill brett</button>
   </main>
   <select
     class="bingo-options"
     aria-label="Velg tekst"
-  >
-
-  </select>
+  ></select>
 </body>
 
 </html>

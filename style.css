@@ -122,6 +122,13 @@ canvas {
   transition: 0.25s ease transform;
 }
 
+.controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .control {
   align-items: center;
   display: flex;
@@ -184,7 +191,6 @@ canvas {
   background-color: white;
   border: 2px solid var(--color-2);
   font-family: inherit;
-  font-size: 0.75rem;
-  margin-top: 1rem;
+  font-size: 0.5rem;
   padding: 0.25em 0.5em;
 }
