@@ -30,7 +30,7 @@ const optionGroups = [{
     "Team-Ingen kalender",
     "Juletre 23. desember",
     "Juletre 1. desember",
-    "Mariah Carrey",
+    "Mariah Carey",
     "Kurt Nilsen",
     "Whamageddon",
     "Sludd",
