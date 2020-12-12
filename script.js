@@ -16,6 +16,7 @@ const $bingoGrid = document.querySelector(".bingo-grid");
 const $bingoOptions = document.querySelector(".bingo-options");
 const $switch = document.querySelector(".toggle-switch");
 const $resetButton = document.querySelector(".reset-button");
+const $randomizeButton = document.querySelector(".randomize-button");
 
 let bingoTiles = [];
 
@@ -211,8 +212,11 @@ function onToggleGameMode(event) {
     if (bingoOptionsIsInDom) {
       $bingoOptions.parentElement.removeChild($bingoOptions);
     }
+
+    $randomizeButton.style.visibility = 'hidden';
   } else {
     currentState = states[PICK_AND_CHOOSE];
+    $randomizeButton.style.visibility = 'visible';
   }
 }
 
@@ -220,6 +224,7 @@ function init() {
   reset();
   $bingoOptions.addEventListener('change', onSelectOption);
   $switch.addEventListener('change', onToggleGameMode);
+  $randomizeButton.addEventListener('click', randomize);
 
   $resetButton.addEventListener('click', () => {
     const dialog = new ConfirmDialog({
@@ -235,6 +240,26 @@ function init() {
     });
   });
 
+}
+
+function randomize() {
+  reset();
+
+  for (const $tile of bingoTiles) {
+    const option = getRandomFromArray(getAvailableOptions().flatMap(optionGroup => optionGroup.options));
+
+    setBingoOption(option, $tile);
+    emptyBingoOptions();
+    addBingoOptions();
+  }
+}
+
+function getRandomFromArray(array) {
+  if (!array || !array.length) {
+    return null;
+  }
+
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 function reset() {
