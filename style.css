@@ -15,7 +15,7 @@
   --color-4: #FCE100;
 
   --snow-z-index: 1;
-  --tile-z-index: calc(var(--snow-z-index) + 1);;
+  --tile-z-index: calc(var(--snow-z-index) + 1);
   --select-z-index: calc(var(--tile-z-index) + 1);
 }
 
