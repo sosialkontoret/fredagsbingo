@@ -39,6 +39,8 @@ class ConfirmDialog {
 
   _createDialog() {
     this.dialog = document.createElement("dialog");
+    dialogPolyfill.registerDialog(this.dialog);
+
     this.dialog.classList.add("confirm-dialog");
 
     const question = document.createElement("div");
